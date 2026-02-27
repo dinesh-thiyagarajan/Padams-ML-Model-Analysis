@@ -5,12 +5,11 @@ dist/
 build/
 *.egg
 .eggs/
-*.tflite
 *.h5
-*.keras
 models/saved_model/
 models/best_model*
 models/face_embedder/
+data/synthetic_faces/
 .env
 .venv/
 venv/

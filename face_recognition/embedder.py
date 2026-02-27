@@ -170,11 +170,8 @@ def build_mobilefacenet(
     x = tf.keras.layers.Dense(embedding_size, use_bias=False, name="embedding_dense")(x)
     x = tf.keras.layers.BatchNormalization(name="embedding_bn")(x)
 
-    # L2 normalize the embedding
-    embeddings = tf.keras.layers.Lambda(
-        lambda t: tf.math.l2_normalize(t, axis=1),
-        name="l2_normalize",
-    )(x)
+    # L2 normalize the embedding (use UnitNormalization for robust behavior)
+    embeddings = tf.keras.layers.UnitNormalization(axis=1, name="l2_normalize")(x)
 
     model = tf.keras.Model(inputs=inputs, outputs=embeddings, name="MobileFaceNet")
     return model
